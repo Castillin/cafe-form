@@ -1,0 +1,92 @@
+<DOCTYOE html>
+<html>
+    <head>
+        <title>Café Form</title>
+       
+    </head>
+    <body>
+        <form name="myForm">
+             <label for="name">Name:</label>
+             <input type="text" id="name" name="name"><br><br>
+
+             <p>Which coffee you want to order?</p>
+             Turkish coffee 3$ <input type="radio" name="rad" value="Turkish coffee"><br> 
+             American coffee 5$<input type="radio" name="rad" value="American coffee"><br>
+             Iced latte 7$     <input type="radio" name="rad" value="Iced latte"><br><br>
+        
+             <p>Do you need any extras?</p>
+             <input type="checkbox" id="ecoffee" name="ecoffee" value="Extra coffee">
+             <label for="ecoffee"> Extra coffee 1.5$</label><br>
+             <input type="checkbox" id="wcream" name="wcream" value="Whipped cream">
+             <label for="wcream"> Whipped cream 2$</label><br>
+             <input type="checkbox" id="ecaramel" name="ecaramel" value="Extra caramel">
+             <label for="ecaramel"> Extra caramel 3$</label><br>
+
+             <p>What size?</p>
+             Small 1.5$ <input type="radio" name="rad1" value="Small"><br> 
+             Medium 2.5$<input type="radio" name="rad1" value="Medium" ><br>
+             Large 3.5$ <input type="radio" name="rad1" value="Large" ><br><br>
+
+             <input type="submit" onclick="customerdata()" value="Submit">
+             <p id="para"></p><br>
+             <p id="price"></p>
+
+
+        </form>
+        <script>
+          function customerdata(){
+
+            var vpara= "Customer "+document.getElementById("name").value + " ordered: ";
+            var vsum= 0
+
+            var getSelectedValue = document.querySelector( 'input[name="rad"]:checked');   
+            if(getSelectedValue != null) {  
+              vpara += " " +getSelectedValue.value;
+              if (getSelectedValue.value == "Turkish coffee"){
+                vsum +=  3 ;
+                } else if (getSelectedValue.value == "American coffee"){
+                  vsum += 5 ;
+                } else{
+                  vsum += 7; 
+                }
+            }
+           
+            vpara +=" with";
+
+            var inputs = document.querySelectorAll("input[type='checkbox']:checked");
+            for(var i=0;i<inputs.length;i++){
+              vpara += inputs[i].value + " , ";
+              if (inputs[i].value=="Extra coffee"){
+                vsum += 1.5 ;
+              }else if (inputs[i].value=="Whipped cream") {
+                vsum += 2 ;
+              }else{
+                vsum += 3 ;
+              }
+            }
+
+            vpara +=" and size";
+
+            var getSelectedValue1 = document.querySelector( 'input[name="rad1"]:checked');   
+            if(getSelectedValue1 != null) {  
+              vpara += " " +getSelectedValue1.value;
+              if (getSelectedValue1.value == "Small"){
+                vsum +=  1.5 ;
+                } else if (getSelectedValue1.value == "Medium"){
+                  vsum +=  2.5 ;
+                } else{
+                  vsum += 3.5 ;
+                }
+            }  
+
+            document.getElementById("para").innerText = vpara ;
+            document.getElementById("price").innerText = "Total price: " +vsum.toString() ;
+            event.preventDefault();
+          } 
+
+          
+          
+        </script>
+
+    </body>
+</html>
